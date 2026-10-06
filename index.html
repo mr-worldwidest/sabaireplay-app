@@ -83,52 +83,90 @@
         text-align: center;
       }
 
-      .store-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+      .waitlist {
+        width: min(100%, 320px);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
         gap: 10px;
+        margin: 0 auto;
+      }
+
+      .waitlist label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .waitlist input[type="email"] {
+        width: 100%;
+        height: 48px;
+        margin: 0;
+        padding: 0 14px;
+        border: 1px solid #2c2c2c;
+        border-radius: 8px;
+        background: transparent;
+        color: var(--paper);
+        font: inherit;
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .waitlist input[type="email"]::placeholder {
+        color: var(--muted);
+      }
+
+      .waitlist input[type="email"]:focus-visible {
+        outline: 2px solid var(--paper);
+        outline-offset: 2px;
+      }
+
+      .waitlist button {
+        height: 48px;
+        border: 0;
+        border-radius: 8px;
         background: #fff;
         color: #000;
-        text-decoration: none;
-        border-radius: 8px;
-        padding: 8px 16px 8px 12px;
-        min-width: 168px;
-        margin: 0 auto;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
         transition: opacity 0.2s ease;
       }
 
-      .store-button:hover {
+      .waitlist button:hover {
         opacity: 0.88;
       }
 
-      .apple {
-        font:
-          1.85rem/1 "SF Pro Text",
-          -apple-system,
-          BlinkMacSystemFont,
-          system-ui,
-          sans-serif;
-        margin-top: -2px;
+      .waitlist button:focus-visible {
+        outline: 2px solid var(--paper);
+        outline-offset: 2px;
       }
 
-      .store-copy {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        line-height: 1.05;
-        text-align: left;
+      .waitlist button:disabled {
+        opacity: 0.6;
+        cursor: default;
       }
 
-      .store-copy small {
-        font-size: 0.62rem;
-        letter-spacing: 0.01em;
+      .waitlist-status {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
       }
 
-      .store-copy strong {
-        font-size: 1.05rem;
-        font-weight: 600;
-        letter-spacing: -0.01em;
+      .honey {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
       }
 
       .legal {
@@ -172,22 +210,85 @@
     <main>
       <img class="icon" src="sabai-icon.jpg" alt="Sabai Replay app icon" />
       <h1>Improve every round.<br />Replay the moments that matter.</h1>
-      <a
-        class="store-button"
-        href="#"
-        aria-label="Download Sabai Replay on the App Store"
-      >
-        <span class="apple" aria-hidden="true">&#63743;</span>
-        <span class="store-copy">
-          <small>Download on the</small>
-          <strong>App Store</strong>
-        </span>
-      </a>
+      <form class="waitlist" id="waitlist" novalidate>
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          spellcheck="false"
+          required
+          placeholder="Email address"
+        />
+        <input
+          class="honey"
+          type="text"
+          name="_honey"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+        <button type="submit">Join the waitlist</button>
+        <p class="waitlist-status" role="status" hidden></p>
+      </form>
       <p class="legal">
         View our <a href="privacy.html">Privacy Policy</a> |
         <a href="terms.html">Terms of Use</a> |
         <a href="support.html">Support</a>
       </p>
     </main>
+    <script>
+      const form = document.getElementById("waitlist");
+      const status = form.querySelector(".waitlist-status");
+      const emailInput = form.querySelector("#email");
+      const button = form.querySelector("button");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        emailInput.value = email;
+        status.hidden = false;
+
+        if (form.querySelector("[name='_honey']").value) {
+          form.replaceChildren(status);
+          status.textContent = "You're on the list.";
+          return;
+        }
+
+        if (!emailInput.checkValidity()) {
+          status.textContent = "Enter an email address.";
+          emailInput.focus();
+          return;
+        }
+
+        button.disabled = true;
+        const label = button.textContent;
+        button.textContent = "Joining…";
+        status.textContent = "";
+
+        try {
+          const response = await fetch("/api/waitlist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({ email }),
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok || !data.ok) {
+            status.textContent = "Couldn't add that email. Try again.";
+            button.disabled = false;
+            button.textContent = label;
+            return;
+          }
+          form.replaceChildren(status);
+          status.textContent = "You're on the list.";
+        } catch {
+          status.textContent = "Couldn't add that email. Try again.";
+          button.disabled = false;
+          button.textContent = label;
+        }
+      });
+    </script>
   </body>
 </html>
