@@ -264,13 +264,16 @@
           aria-hidden="true"
         />
         <p class="consent-note">
-          Y1 Engineering, LLC will email you when Sabai Replay is available.
-          You confirm you are 13 or older.
+          We will email you when Sabai Replay is available. You confirm you are
+          13 or older.
           <a href="privacy.html">Privacy Policy</a>
         </p>
         <label class="consent" for="marketing">
           <input id="marketing" name="marketing" type="checkbox" value="yes" />
-          <span>Also email me occasional updates and offers. Unsubscribe any time.</span>
+          <span
+            >Also email me occasional updates and offers. Unsubscribe any
+            time.</span
+          >
         </label>
         <button type="submit">Join the waitlist</button>
         <p class="waitlist-status" role="status" hidden></p>
@@ -324,7 +327,8 @@
               body: JSON.stringify({
                 email,
                 marketing: marketing ? "yes" : "no",
-                consent: "Email me when Sabai Replay is available. I am 13 or older.",
+                consent:
+                  "We will email you when Sabai Replay is available. You confirm you are 13 or older.",
                 marketing_consent: marketing
                   ? "Also email me occasional updates and offers. Unsubscribe any time."
                   : "no",
@@ -336,7 +340,7 @@
                 _captcha: "false",
                 _template: "box",
               }),
-            }
+            },
           );
           const data = await response.json().catch(() => ({}));
           const message = String(data.message || "");
