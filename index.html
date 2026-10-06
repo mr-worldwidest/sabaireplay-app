@@ -84,7 +84,7 @@
       }
 
       .waitlist {
-        width: min(100%, 320px);
+        width: min(100%, 360px);
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -92,7 +92,7 @@
         margin: 0 auto;
       }
 
-      .waitlist label {
+      .waitlist label[for="email"] {
         position: absolute;
         width: 1px;
         height: 1px;
@@ -152,6 +152,39 @@
       .waitlist button:disabled {
         opacity: 0.6;
         cursor: default;
+      }
+
+      .consent-note,
+      .consent {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.45;
+        text-align: left;
+      }
+
+      .consent-note a {
+        color: inherit;
+      }
+
+      .consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      .consent input {
+        width: 16px;
+        height: 16px;
+        margin: 2px 0 0;
+        flex: none;
+        accent-color: #fff;
+      }
+
+      .consent input:focus-visible {
+        outline: 2px solid var(--paper);
+        outline-offset: 2px;
       }
 
       .waitlist-status {
@@ -230,6 +263,15 @@
           autocomplete="off"
           aria-hidden="true"
         />
+        <p class="consent-note">
+          Y1 Engineering, LLC will email you when Sabai Replay is available.
+          You confirm you are 13 or older.
+          <a href="privacy.html">Privacy Policy</a>
+        </p>
+        <label class="consent" for="marketing">
+          <input id="marketing" name="marketing" type="checkbox" value="yes" />
+          <span>Also email me occasional updates and offers. Unsubscribe any time.</span>
+        </label>
         <button type="submit">Join the waitlist</button>
         <p class="waitlist-status" role="status" hidden></p>
       </form>
@@ -243,6 +285,7 @@
       const form = document.getElementById("waitlist");
       const status = form.querySelector(".waitlist-status");
       const emailInput = form.querySelector("#email");
+      const marketingInput = form.querySelector("#marketing");
       const button = form.querySelector("button");
 
       form.addEventListener("submit", async (event) => {
@@ -263,6 +306,7 @@
           return;
         }
 
+        const marketing = marketingInput.checked;
         button.disabled = true;
         const label = button.textContent;
         button.textContent = "Joining…";
@@ -279,7 +323,16 @@
               },
               body: JSON.stringify({
                 email,
-                _subject: "Sabai Replay waitlist",
+                marketing: marketing ? "yes" : "no",
+                consent: "Email me when Sabai Replay is available. I am 13 or older.",
+                marketing_consent: marketing
+                  ? "Also email me occasional updates and offers. Unsubscribe any time."
+                  : "no",
+                source: "https://sabaireplay.app",
+                consented_at: new Date().toISOString(),
+                _subject: marketing
+                  ? "Sabai Replay waitlist + updates"
+                  : "Sabai Replay waitlist",
                 _captcha: "false",
                 _template: "box",
               }),
@@ -298,7 +351,9 @@
             return;
           }
           form.replaceChildren(status);
-          status.textContent = "You're on the list.";
+          status.textContent = marketing
+            ? "You're on the list. We'll email you when Sabai Replay is available, and send occasional updates. Unsubscribe any time."
+            : "You're on the list. We'll email you when Sabai Replay is available.";
         } catch {
           status.textContent = "Couldn't add that email. Try again.";
           button.disabled = false;
