@@ -1,163 +1,184 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Help and support for Sabai Replay.">
-  <title>Support — Sabai Replay</title>
-  <link rel="icon" href="sabai-icon.jpg" type="image/jpeg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      color-scheme: dark;
-      --ink: #050505;
-      --paper: #f7f3ea;
-      --muted: #aaa8a2;
-      --sf: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Help and support for Sabai Replay." />
+    <title>Support — Sabai Replay</title>
+    <link rel="icon" href="sabai-icon.jpg" type="image/jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #050505;
+        --paper: #f7f3ea;
+        --muted: #aaa8a2;
+        --sf:
+          "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
 
-    * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
 
-    body {
-      margin: 0;
-      background: var(--ink);
-      color: var(--paper);
-      font-family: var(--sf);
-      text-align: center;
-    }
+      body {
+        margin: 0;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--sf);
+        text-align: center;
+      }
 
-    a { color: inherit; }
+      a {
+        color: inherit;
+      }
 
-    .shell {
-      width: min(760px, calc(100% - 40px));
-      margin: 0 auto;
-      text-align: left;
-    }
+      .shell {
+        width: min(760px, calc(100% - 40px));
+        margin: 0 auto;
+        text-align: left;
+      }
 
-    header {
-      width: min(760px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 36px 0 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      text-align: center;
-    }
+      header {
+        width: min(760px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 36px 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        text-align: center;
+      }
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      text-align: center;
-    }
+      .brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        text-align: center;
+      }
 
-    .brand img {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      display: block;
-      margin: 0 auto;
-      object-fit: cover;
-    }
+      .brand img {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+      }
 
-    .back {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-    }
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.88rem;
+      }
 
-    .back:hover { color: var(--paper); }
+      .back:hover {
+        color: var(--paper);
+      }
 
-    main {
-      padding: 64px 0 120px;
-      min-height: calc(100vh - 220px);
-      text-align: left;
-    }
+      main {
+        padding: 64px 0 120px;
+        min-height: calc(100vh - 220px);
+        text-align: left;
+      }
 
-    h1 {
-      font-family: Kanit, sans-serif;
-      font-weight: 600;
-      font-size: clamp(1.15rem, 2.6vw, 1.35rem);
-      line-height: 1.45;
-      letter-spacing: 0.01em;
-      margin: 0 0 28px;
-      text-align: left;
-    }
+      h1 {
+        font-family: Kanit, sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.15rem, 2.6vw, 1.35rem);
+        line-height: 1.45;
+        letter-spacing: 0.01em;
+        margin: 0 0 28px;
+        text-align: left;
+      }
 
-    .body-copy {
-      color: var(--muted);
-      font-family: var(--sf);
-      font-size: 1.08rem;
-      line-height: 1.8;
-      max-width: 610px;
-      margin: 0;
-      text-align: left;
-    }
+      .body-copy {
+        color: var(--muted);
+        font-family: var(--sf);
+        font-size: 1.08rem;
+        line-height: 1.8;
+        max-width: 610px;
+        margin: 0;
+        text-align: left;
+      }
 
-    .body-copy a {
-      color: var(--paper);
-      text-decoration-color: #f0160d;
-      text-underline-offset: 4px;
-    }
+      .body-copy a {
+        color: var(--paper);
+        text-decoration-color: #f0160d;
+        text-underline-offset: 4px;
+      }
 
-    footer {
-      border-top: 1px solid #222;
-      padding: 28px 0 38px;
-      color: #777;
-      font-size: 0.82rem;
-      text-align: center;
-    }
+      footer {
+        border-top: 1px solid #222;
+        padding: 28px 0 38px;
+        color: #777;
+        font-size: 0.82rem;
+        text-align: center;
+      }
 
-    .footer-inner {
-      width: min(760px, calc(100% - 40px));
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
-      text-align: center;
-    }
+      .footer-inner {
+        width: min(760px, calc(100% - 40px));
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        text-align: center;
+      }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 24px;
-    }
+      nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+      }
 
-    nav a { text-decoration: none; }
+      nav a {
+        text-decoration: none;
+      }
 
-    @media (max-width: 600px) {
-      main { padding: 48px 0 90px; }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <a class="brand" href="index.html"><img src="sabai-icon.jpg" alt=""><span>Sabai Replay</span></a>
-    <a class="back" href="index.html">← Back home</a>
-  </header>
-  <main class="shell">
-    <h1>Support</h1>
-    <div class="body-copy">
-      <p>If you have any questions or need assistance, please reach out:</p>
-      <p>Email: <a href="mailto:y1@sabaireplay.app">y1@sabaireplay.app</a></p>
-    </div>
-  </main>
-  <footer>
-    <div class="footer-inner">
-      <span>© 2026 Sabai Replay</span>
-      <nav aria-label="Footer"><a href="privacy.html">Privacy</a><a href="support.html">Support</a></nav>
-    </div>
-  </footer>
-</body>
+      @media (max-width: 600px) {
+        main {
+          padding: 48px 0 90px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="index.html"
+        ><img src="sabai-icon.jpg" alt="" /><span>Sabai Replay</span></a
+      >
+      <a class="back" href="index.html">← Back home</a>
+    </header>
+    <main class="shell">
+      <h1>Support</h1>
+      <div class="body-copy">
+        <p>If you have any questions or need assistance, please reach out:</p>
+        <p>Email: <a href="mailto:y1@sabaireplay.app">y1@sabaireplay.app</a></p>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-inner">
+        <span>© 2026 Sabai Replay</span>
+        <nav aria-label="Footer">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="support.html" aria-current="page">Support</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
 </html>
